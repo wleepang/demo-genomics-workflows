@@ -32,11 +32,15 @@ cd /opt/work/$GUID
 
 # stage workflow definition
 NF_FILE=""
+NF_PROJECT=""
 if [ ! -z "$NEXTFLOW_PROJECT" ]; then
-    aws s3 sync --only-show-errors --exclude 'runs/*' --exclude '.*' $NEXTFLOW_PROJECT .
-    NF_FILE=$(find . -maxdepth 1 -name "*.nf")
+    NF_PROJECT=$(basename $NEXTFLOW_PROJECT)
+    aws s3 sync --only-show-errors --exclude 'runs/*' --exclude '.*' $NEXTFLOW_PROJECT ./$NF_PROJECT
+    NF_FILE=$(find ./$NF_PROJECT -maxdepth 1 -name "*.nf")
 fi
 
 echo "== Running Workflow =="
 echo "nextflow run $NF_FILE $NEXTFLOW_PARAMS"
 nextflow run $NF_FILE $NEXTFLOW_PARAMS
+
+# @TODO: need to stage session logs back to S3 to support -resume
