@@ -29,7 +29,7 @@ Once the stack launch has completed, go to the Amazon Cloud9 Console and open th
 In a terminal within the Cloud9 IDE, run:
 
 ```bash
-./genomics-workflows/setup.sh
+source ./genomics-workflows/setup.sh
 ```
 
 ![run setup](images/run-setup.png)
