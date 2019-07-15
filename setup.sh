@@ -1,5 +1,7 @@
 #!/bin/bash
 
+CWD=$(pwd)
+
 # core requirements
 sudo yum install -y jq
 
@@ -26,3 +28,5 @@ process.executor = "awsbatch"
 process.queue = "${DEFAULT_JOB_QUEUE}"
 executor.awscli = "/home/ec2-user/miniconda/bin/aws"
 EOF
+
+cd $CWD
