@@ -13,6 +13,10 @@ sudo yum install -y java-1.8.0-openjdk
 sudo alternatives --set java /usr/lib/jvm/jre-1.8.0-openjdk.x86_64/bin/java
 export JAVA_HOME=/usr/lib/jvm/jre-1.8.0-openjdk.x86_64
 
+# do this so that any new shells spawned use the correct
+# java version
+echo "export JAVA_HOME=$JAVA_HOME" >> ~/.bash_profile
+
 # get and install nextflow
 mkdir ~/bin
 cd ~/bin
