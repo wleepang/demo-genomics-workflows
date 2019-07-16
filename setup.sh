@@ -18,19 +18,26 @@ export JAVA_HOME=/usr/lib/jvm/jre-1.8.0-openjdk.x86_64
 echo "export JAVA_HOME=$JAVA_HOME" >> ~/.bash_profile
 
 # get and install nextflow
-mkdir ~/bin
+mkdir -p ~/bin
 cd ~/bin
 curl -s https://get.nextflow.io | bash
 
 # create a nextflow config for aws-batch
 CONFIG_DIR=~/environment/config
-mkdir $CONFIG_DIR
+mkdir -p $CONFIG_DIR
+
+# TODO: use cloudformation outputs to get these values
 DEFAULT_JOB_QUEUE=$(aws batch describe-job-queues | jq -r .jobQueues[].jobQueueName | grep default)
+WORK_BUCKET=$(aws s3 ls | cut -d " " -f 2 | grep genomics-workflows)
 
 cat <<EOF > $CONFIG_DIR/batch.config
+workDir = "s3://${WORK_BUCKET}"
 process.executor = "awsbatch"
 process.queue = "${DEFAULT_JOB_QUEUE}"
 executor.awscli = "/home/ec2-user/miniconda/bin/aws"
 EOF
 
 cd $CWD
+
+# create a public key for ssh
+ssh-keygen -q -t rsa -A
