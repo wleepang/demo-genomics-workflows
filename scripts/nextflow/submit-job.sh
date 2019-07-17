@@ -10,6 +10,7 @@ HIGHPRIORITY_JOB_QUEUE=$(aws --region $AWS_REGION batch describe-job-queues | jq
 
 # submits nextflow workflow to AWS Batch
 aws batch submit-job \
+    --region $AWS_REGION \
     --job-definition nextflow \
     --job-name nf-workflow-${WORKFLOW_NAME} \
     --job-queue ${HIGHPRIORITY_JOB_QUEUE} \
