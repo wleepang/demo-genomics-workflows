@@ -1,5 +1,6 @@
 {
     "command": [
-      "''", "wleepang/demo-genomics-workflow-nextflow"
+      "''", "wleepang/demo-genomics-workflow-nextflow",
+      "--output", "$(dirname $NF_WORKDIR)/results"
     ]
 }
