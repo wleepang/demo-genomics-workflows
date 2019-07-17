@@ -26,7 +26,7 @@ curl -s https://get.nextflow.io | bash
 CONFIG_DIR=~/environment/config
 mkdir -p $CONFIG_DIR
 
-AWS_REGION=$(curl http://169.254.169.254/latest/meta-data/placement/availability-zone| sed -r "s/(.*?)[a-z]/\1/")
+AWS_REGION=$(curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone| sed -r "s/(.*?)[a-z]/\1/")
 
 # TODO: use cloudformation outputs to get these values
 DEFAULT_JOB_QUEUE=$(aws batch --region $AWS_REGION describe-job-queues | jq -r .jobQueues[].jobQueueName | grep default)
