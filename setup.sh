@@ -26,8 +26,10 @@ curl -s https://get.nextflow.io | bash
 CONFIG_DIR=~/environment/config
 mkdir -p $CONFIG_DIR
 
+AWS_REGION=$(curl http://169.254.169.254/latest/meta-data/placement/availability-zone| sed -r "s/(.*?)[a-z]/\1/")
+
 # TODO: use cloudformation outputs to get these values
-DEFAULT_JOB_QUEUE=$(aws batch describe-job-queues | jq -r .jobQueues[].jobQueueName | grep default)
+DEFAULT_JOB_QUEUE=$(aws batch --region $AWS_REGION describe-job-queues | jq -r .jobQueues[].jobQueueName | grep default)
 WORK_BUCKET=$(aws s3 ls | cut -d " " -f 3 | grep genomics-workflows)
 
 cat <<EOF > $CONFIG_DIR/batch.config
