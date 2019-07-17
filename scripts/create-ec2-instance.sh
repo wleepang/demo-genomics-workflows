@@ -3,7 +3,7 @@
 # ssh'd to from the C9 IDE instance
 
 PUBKEY=$(cat ~/.ssh/id_rsa.pub)
-USER_DATA=$(cat <<EOF | base64
+USER_DATA=$(cat <<EOF
 #!/bin/bash
 # install the pubkey from this host
 echo "${PUBKEY}" >> /home/ec2-user/.ssh/authorized_keys
