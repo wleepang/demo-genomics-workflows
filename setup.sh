@@ -28,7 +28,7 @@ mkdir -p $CONFIG_DIR
 
 # TODO: use cloudformation outputs to get these values
 DEFAULT_JOB_QUEUE=$(aws batch describe-job-queues | jq -r .jobQueues[].jobQueueName | grep default)
-WORK_BUCKET=$(aws s3 ls | cut -d " " -f 2 | grep genomics-workflows)
+WORK_BUCKET=$(aws s3 ls | cut -d " " -f 3 | grep genomics-workflows)
 
 cat <<EOF > $CONFIG_DIR/batch.config
 workDir = "s3://${WORK_BUCKET}"
