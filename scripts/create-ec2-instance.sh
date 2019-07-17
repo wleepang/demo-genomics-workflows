@@ -13,7 +13,7 @@ yum install -y git
 # get and install genomics-workflows demo
 cd /home/ec2-user
 sudo -u ec2-user git clone https://github.com/wleepang/demo-genomics-workflows.git genomics-workflows
-sudo -u ec2-user . ./genomics-workflows/setup.sh
+sudo -u ec2-user bash ./genomics-workflows/setup.sh
 EOF
 )
 
