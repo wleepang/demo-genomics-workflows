@@ -17,7 +17,6 @@ EOF
 )
 
 aws ec2 run-instances \
-    # amzn2-ami-hvm-2.0.20190618-x86_64-gp2
     --image-id ami-0b898040803850657 \
     --instance-type t2.micro \
     --count 1 \

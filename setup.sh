@@ -40,4 +40,4 @@ EOF
 cd $CWD
 
 # create a public key for ssh
-ssh-keygen -q -t rsa -A
+ssh-keygen -f $HOME/.ssh/id_rsa -t rsa -N ''
